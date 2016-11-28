@@ -1,6 +1,6 @@
 
 
-def tell_missing(trainfile, segfile)
+def tell_missing(trainfile, segfile):
     orig_phones = set()
     with open(trainfile) as f1:
         lines1 = f1.readlines()

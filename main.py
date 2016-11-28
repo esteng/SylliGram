@@ -24,7 +24,7 @@ def main():
     if rc != 0:
         print "ERROR: the adaptor grammar was unable to parse your files"
         missing_segs = tell_missing(os.path.join(input_dir, "train.dat"), grammar_file)
-        if len(missing_segs >0):
+        if len(missing_segs) >0:
             print "This is due to missing segments in your segfile. You are missing the following:"
             print missing_segs
         else:
