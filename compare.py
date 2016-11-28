@@ -44,7 +44,7 @@ for k,v in true_words.items():
 
 
 print("{} remained unmatched".format(unfound))
-print("matched {} out of {}, which is {}%".format((len(lines1) - unfound), len(lines1), 100* (len(lines1) - unfound)/len(lines1)))
+print("matched {} out of {}, which is {}%".format((len(lines1) - unfound), len(lines1), float(100* (len(lines1) - unfound)/len(lines1))))
 
 
 

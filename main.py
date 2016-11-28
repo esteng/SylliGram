@@ -23,10 +23,10 @@ infag_regex = re.compile("infag.*")
 for path in os.walk(output_dir):
     for fn in path[2]:
         if infag_regex.match(fn) is not None:
-            filename = fn
+            filename = os.path.join(path[0],fn)
 
 
-all_words = infag_parser.parse_file(os.path.join(output_dir, filename))
+all_words = infag_parser.parse_file(filename)
 with open("syllabified", "w") as f2:
     for k,v in all_words.items():
         w = v[0]
