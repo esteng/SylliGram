@@ -700,6 +700,7 @@ class Hybrid(object):
                         #root_and_position_to_node[lhs][(i, j)].add_new_derivation(unary_production, E_log_theta[lhs][0, gamma_index], [root_and_position_to_node[rhs][(i, j)]]);
         
         if sentence_root==None:
+            print input_sequence
             return root_and_position_to_node[self._start_symbol][(0, sequence_length)];
         else:
             assert isinstance(sentence_root, nltk.grammar.Nonterminal);

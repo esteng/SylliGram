@@ -7,7 +7,7 @@ import tempfile
 import os
 import re
 
-write_grammar("aAiyuoOeE02951@3", "pbtdkglfvszSZmnNIRxG", "{}".format(sys.argv[2]), "j8w")
+write_grammar("5IYE/A{aQO}VU@iye&aouUA0O3E:", "pbtdkgNmnlRrfvTDszSZjxGhw*", "{}".format(sys.argv[2]))
 
 grammar_file = sys.argv[2]
 input_dir = sys.argv[1]

@@ -1,0 +1,75 @@
+% non-terminals
+Word ->  Syls
+Syls ->  Syl
+Syls ->  Syl Syls
+
+% adapted non-terminals
+@ Word 1500 100 0
+Syl ->  Rhyme
+Syl ->  Onset Rhyme
+Rhyme -> Nucleus
+Rhyme -> Nucleus Coda
+Onset -> Consonant
+Onset -> Consonant Consonants
+Coda -> Consonant
+Coda -> Consonant Consonants
+Consonants -> Consonant
+Consonants -> Consonant Consonants
+Nucleus -> Vowel
+Nucleus -> Consonant
+
+%terminals
+Vowel -> "5"
+Vowel -> "I"
+Vowel -> "Y"
+Vowel -> "E"
+Vowel -> "/"
+Vowel -> "A"
+Vowel -> "{"
+Vowel -> "a"
+Vowel -> "Q"
+Vowel -> "O"
+Vowel -> "}"
+Vowel -> "V"
+Vowel -> "U"
+Vowel -> "@"
+Vowel -> "i"
+Vowel -> "y"
+Vowel -> "e"
+Vowel -> "&"
+Vowel -> "a"
+Vowel -> "o"
+Vowel -> "u"
+Vowel -> "U"
+Vowel -> "A"
+Vowel -> "0"
+Vowel -> "O"
+Vowel -> "3"
+Vowel -> "E"
+Vowel -> ":"
+Consonant -> "p"
+Consonant -> "b"
+Consonant -> "t"
+Consonant -> "d"
+Consonant -> "k"
+Consonant -> "g"
+Consonant -> "N"
+Consonant -> "m"
+Consonant -> "n"
+Consonant -> "l"
+Consonant -> "R"
+Consonant -> "r"
+Consonant -> "f"
+Consonant -> "v"
+Consonant -> "T"
+Consonant -> "D"
+Consonant -> "s"
+Consonant -> "z"
+Consonant -> "S"
+Consonant -> "Z"
+Consonant -> "j"
+Consonant -> "x"
+Consonant -> "G"
+Consonant -> "h"
+Consonant -> "w"
+Consonant -> "*"

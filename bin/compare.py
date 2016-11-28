@@ -18,8 +18,6 @@ unfound = 0
 for line in lines1:
     splitline = line.split(":")
     true_words[splitline[0]] = splitline[1]
-    if "ReORdone" in line:
-        print("Mapping {} to {}".format(splitline[0], splitline[1]))
 
 for line in lines2:
     splitline = line.split(":")
