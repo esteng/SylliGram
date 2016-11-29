@@ -31,14 +31,16 @@ for k,v in true_words.items():
         if found_words[k].strip() == v.strip():
             # print("{} matches to {}".format(found_words[k].strip(), v.strip()))
             found = True
-
+        else:
+            print("{} doesnt match {}".format(found_words[k].strip(), v.strip()))
+            unfound += 1
     except KeyError:
-        pass
-        print("{} not in found_words".format(k))
-        unfound+=1
-    if not found:
-        unfound += 1
-        print("{} has no match".format(k.strip()))
+        if k.startswith("Unt@rbrINUN"):
+            print("couldn't find Unt@rbrINUN")
+        # print("{} not in found_words".format(k))
+        # unfound+=1
+    
+        # print("{} has no match".format(k.strip()))
 
 
 print("{} remained unmatched".format(unfound))

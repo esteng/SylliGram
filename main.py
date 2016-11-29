@@ -10,12 +10,41 @@ import re
 
 # change to read from file
 def main():
-    write_grammar(sys.argv[1], "{}".format(sys.argv[3]))
-
+    syllabics = write_grammar(sys.argv[1], "{}".format(sys.argv[3]))
     grammar_file = sys.argv[3]
-    input_dir = sys.argv[2]
+    input_dir = os.path.split(sys.argv[2])[0]
+    input_file = os.path.split(sys.argv[2])[1]
     output_dir = tempfile.mkdtemp()
+    output_dir = "/Users/Elias/SylliGram"
+    end =0
     print(output_dir)
+    #clean corpus
+    towrite = []
+    with open(os.path.join(input_dir, input_file), "r") as f4:
+        train_lines = f4.readlines()
+        
+        for i,line in enumerate(train_lines):
+            has_syllabic = False
+            for s in syllabics:
+                if s in line:
+                    has_syllabic = True
+                    towrite.append(line)
+                    continue
+            if not has_syllabic:
+                continue
+            end = i
+    with open(os.path.join(input_dir, "train.dat"), "w") as f5:
+        jprime = 0
+        for j,line in enumerate(towrite):
+            f5.write(line)
+            jprime = j
+        for x in range(end-jprime):
+            f5.write("\n")
+
+
+
+
+  
 
     train_proc = subprocess.Popen(["python2 -m launch_train --input_directory={}\
         --output_directory={} --grammar_file={}".format(input_dir, output_dir,grammar_file)], shell = True)
@@ -39,7 +68,7 @@ def main():
             if infag_regex.match(fn) is not None:
                 filename = os.path.join(path[0],fn)
 
-
+    # open_proc = subprocess.Popen(["open -a /Applications/Sublime\ Text.app {}".format(filename)], shell = True)
     all_words = infag_parser.parse_file(filename)
     with open("syllabified", "w") as f2:
         for k,v in all_words.items():

@@ -4,7 +4,12 @@ Syls ->  Syl
 Syls ->  Syl Syls
 
 % adapted non-terminals
-@ Word 1500 100 0
+@ Word 2500 300 0
+@ Syl 1000 10 0
+@ Coda 1000 10 0
+@ Nucleus 1000 100 0
+@ Onset 5000 100 0
+
 Syl ->  Rhyme
 Syl ->  Onset Rhyme
 Rhyme -> Nucleus
@@ -16,7 +21,6 @@ Coda -> Consonant Consonants
 Consonants -> Consonant
 Consonants -> Consonant Consonants
 Nucleus -> Vowel
-Nucleus -> Consonant
 
 %terminals
 Vowel -> "I"
@@ -65,7 +69,6 @@ Vowel -> "X"
 Vowel -> "^"
 Vowel -> "~"
 Vowel -> "_"
-Vowel -> "c"
 Vowel -> "C"
 Vowel -> "F"
 Vowel -> "H"
@@ -101,3 +104,4 @@ Consonant -> "="
 Consonant -> "J"
 Consonant -> "s"
 Consonant -> "q"
+Consonant -> "c"

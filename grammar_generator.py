@@ -1,6 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
+#@ Word 7500 500 0\n\
+
 import sys 
 
 def write_grammar(seg_file, grammar_file):
@@ -24,7 +26,12 @@ Syls ->  Syl\n\
 Syls ->  Syl Syls\n\
 \n\
 % adapted non-terminals\n\
-@ Word 1500 100 0\n\
+@ Word 2500 300 0\n\
+@ Syl 1000 10 0\n\
+@ Coda 1000 10 0\n\
+@ Nucleus 1000 100 0\n\
+@ Onset 5000 100 0\n\
+\n\
 Syl ->  Rhyme\n\
 Syl ->  Onset Rhyme\n\
 Rhyme -> Nucleus\n\
@@ -36,7 +43,6 @@ Coda -> Consonant Consonants\n\
 Consonants -> Consonant\n\
 Consonants -> Consonant Consonants\n\
 Nucleus -> Vowel\n\
-Nucleus -> Consonant\n\
 \n\
 %terminals\n"
 
@@ -51,7 +57,7 @@ Nucleus -> Consonant\n\
                 f1.write('Vowel -> "{}"'.format(seg.strip())+ "\n")
         for c in nonsyllabics:
             f1.write('Consonant -> "{}"'.format(c.strip())+ "\n")
-
+    return syllabics
         
 
 # try:

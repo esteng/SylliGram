@@ -36,12 +36,12 @@ def parse_file(path):
 
                 try:
                     first = all_words[word][1]
+                    if word == "violEnt":
+                        print("first: {} original: {}, prefix: {} new: {}".format(first, all_words[word][0], prefix, syllabified_word))
                     if first < prefix:
                         all_words[word] = [syllabified_word, prefix] 
-                        # print("replacing {}".format(syllabified_word))   
+                        # print("switching {} to {} because {} < {} ".format(all_words[word][0], syllabified_word, first, prefix))   
                 except KeyError:
-                    if "taRabystER" in word:
-                        print(line)
                     all_words.update({word: [syllabified_word, prefix]}) 
             else:
                 pass
@@ -93,4 +93,3 @@ def process_syl(string):
     #             all_words = parse_file(path)
     #             for w in all_words:
     #                 f2.write(w + "\n")
-    f2.close()

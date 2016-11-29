@@ -1,0 +1,14 @@
+input_directory=
+corpus_name=
+grammar_file=german.grammar
+number_of_processes=0
+number_of_documents=146665
+batch_size=146665
+training_iterations=1
+grammaton_prune_interval=10
+snapshot_interval=10
+tau=64.0
+kappa=0.75
+alpha_pi={Onset: 100.0, Nucleus: 100.0, Coda: 1.0, Word: 300.0, Syl: 10.0}
+beta_pi={Onset: 0.0, Nucleus: 0.0, Coda: 0.0, Word: 0.0, Syl: 0.0}
+desired_truncation_level={Onset: 5000, Nucleus: 1000, Coda: 100, Word: 2500, Syl: 1000}
