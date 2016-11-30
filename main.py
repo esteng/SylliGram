@@ -42,8 +42,6 @@ def run(queue, grammar_file, number, output_dir, towrite):
             syllabified is in a space-separated file named 'train.dat' in the directory you specified as your input\
              directory, and that your grammar file filename has a valid filename and path.")
 
-    # test_proc = subprocess.Popen(["python2 -m launch_test --input_directory=. --model_directory=16Nov29-183700-D150-P10-S10-B150-O1-t64-k0.75-Gfrench.grammar --non_terminal_symbol=Word".format(input_dir)])
-    # test_proc.communicate()
 
     filename = ""
     infag_regex = re.compile("infag.*")
