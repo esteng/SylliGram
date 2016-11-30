@@ -9,8 +9,7 @@ Word ->  Syls
 Syls ->  Syl
 Syls ->  Syl Syls
 Syl -> Rhyme
-Syl -> ORSyl
-ORSyl -> Onset Rhyme
+Syl -> Onset Rhyme
 Rhyme -> Nucleus
 Rhyme -> Nucleus Coda
 Onset -> Consonants

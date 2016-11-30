@@ -32,8 +32,7 @@ Word ->  Syls\n\
 Syls ->  Syl\n\
 Syls ->  Syl Syls\n\
 Syl -> Rhyme\n\
-Syl -> ORSyl\n\
-ORSyl -> Onset Rhyme\n\
+Syl -> Onset Rhyme\n\
 Rhyme -> Nucleus\n\
 Rhyme -> Nucleus Coda\n\
 Onset -> Consonants\n\

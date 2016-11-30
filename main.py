@@ -8,22 +8,15 @@ import tempfile
 import os
 import re
 import math
-from multiprocessing import Process, Queue, cpu_count
-
-def merge_two_dicts(x, y):
-    '''Given two dicts, merge them into a new dict as a shallow copy.'''
-    z = x.copy()
-    z.update(y)
-    return z
 
 # change to read from file
-def run(queue, grammar_file, number, output_dir, towrite):
+def run(grammar_file, output_dir, towrite):
 
-    # with open(os.path.join(input_dir,"train.dat"), "w") as f5:
-    #     jprime = 0
-    #     for j,line in enumerate(towrite):
-    #         if line != '':
-    #             f5.write(line)
+    with open(os.path.join(input_dir,"train.dat"), "w") as f5:
+        jprime = 0
+        for j,line in enumerate(towrite):
+            if line != '':
+                f5.write(line)
 
 
 
@@ -52,18 +45,19 @@ def run(queue, grammar_file, number, output_dir, towrite):
 
     # open_proc = subprocess.Popen(["open -a /Applications/Sublime\ Text.app {}".format(filename)], shell = True)
     all_words = infag_parser.parse_file(filename)
-    q.put(all_words)
+    print(all_words)
+    return all_words
 
 if __name__ == "__main__":
     syllabics = write_grammar(sys.argv[1], "{}".format(sys.argv[3]))
     grammar_file = sys.argv[3]
     input_dir = os.path.split(sys.argv[2])[0]
     input_file = os.path.split(sys.argv[2])[1]
-    # output_dir = tempfile.mkdtemp()
-    output_dir = "/Users/Elias/SylliGram"
+    #change this if you need to inspect infag file
+    output_dir = tempfile.mkdtemp()
     
     end =0
-    #clean corpus
+    #clean corpus, no words without syllabic segments
     towrite = []
     with open(os.path.join(input_dir, input_file), "r") as f4:
         train_lines = f4.readlines()
@@ -74,33 +68,9 @@ if __name__ == "__main__":
                     break
             end = i
     
-    q = Queue()
-    jobs = []
-    print(cpu_count())
-    step = int(math.floor(len(towrite)/1))
-    print("there are {} processes".format(len(["x" for i in range(0, len(towrite), step)])))
 
-    for i in range(0, len(towrite), step):
-        # os.mkdir(os.path.join(input_dir, str(i)))
-
-        p = Process(target = run, args = (q, grammar_file, str(i), os.path.join(output_dir), towrite[i:i+step]))
-        jobs.append(p)
+    all_words = run(grammar_file, output_dir, towrite)
     
-    for i, proc in enumerate(jobs):
-        print('starting proc {}'.format(i))
-        proc.start()
-
-    for i,proc in enumerate(jobs):
-        print('finishing proc {}'.format(i))
-        proc.join()
-
-
-    returned = [q.get() for i in range(0, len(towrite), step)]
-    all_words = {}
-    for d in returned:
-        all_words = merge_two_dicts(all_words, d)
-
-
     with open("/Users/Elias/SylliGram/syllabified", "w") as f2:
         for k,v in all_words.items():
             w = v[0]

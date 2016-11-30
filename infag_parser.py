@@ -30,6 +30,7 @@ def parse_file(path):
                 syllabified_word = ""
                 for syl in syl_strings:
                     # syl = process_syl(s)
+                    print("SYL: {}".format(syl))
                     syl = re.sub("Syl -> ", "", syl)
                     syllabified_word += re.sub("\s","",syl) + " "
                     word +=syl
@@ -54,8 +55,9 @@ def parse_file(path):
 
 def get_syls(string):
     # just_syl = re.compile("Syl -> .*?(?=(, Syls ->)|$)")
-    # syl_regex = re.compile("(?<!\()Syl ->.*?(?=\()")
-    syl_regex = re.compile("(?<!OR)Syl -> [\w\d ]+ ")
+    print("string:  ", string)
+    syl_regex = re.compile("(?<!\()Syl ->.*?(?=\()")
+    # syl_regex = re.compile("Syl -> [\w\d ]+ ")
     return syl_regex.findall(string)
     # return [x.group(0) for x in just_syl.finditer(string)]
 

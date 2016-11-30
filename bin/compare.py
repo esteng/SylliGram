@@ -1,5 +1,7 @@
 import sys
 
+from nltk.metrics import edit_distance
+
 
 file1 = sys.argv[1]
 file2 = sys.argv[2]
@@ -26,13 +28,24 @@ for line in lines2:
 
 words = 0
 found = False
+distances = {}
+
 for k,v in true_words.items():
     try:
         if found_words[k].strip() == v.strip():
-            # print("{} matches to {}".format(found_words[k].strip(), v.strip()))
+            print("{} matches to {}".format(found_words[k].strip(), v.strip()))
+            try:
+                distances[0] +=1
+            except KeyError:
+                distances[0] =1
             found = True
         else:
-            print("{} doesnt match {}".format(found_words[k].strip(), v.strip()))
+            # print("{} doesnt match {}".format(found_words[k].strip(), v.strip()))
+            distance = edit_distance(found_words[k].strip(), v.strip())
+            try:
+                distances[distance] +=1
+            except KeyError:
+                distances[distance] = 1 
             unfound += 1
         words +=1
 
@@ -44,8 +57,12 @@ for k,v in true_words.items():
         # print("{} has no match".format(k.strip()))
 
 
+
 print("{} remained unmatched".format(unfound))
 print("matched {} out of {}, which is {}%".format((len(lines1) - unfound), words, float(100* (len(lines1) - unfound)/words)))
+
+for k in sorted(distances.keys()):
+    print("distance: {}, frequency: {}".format(k, distances[k]))
 
 print("there were {} words".format(words))
 
