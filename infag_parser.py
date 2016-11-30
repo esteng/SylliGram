@@ -53,15 +53,15 @@ def parse_file(path):
     #print("there were {} word lines in file {}".format(words, path))
     return all_words
 
+# find all Syl -> xxx strings
 def get_syls(string):
     # just_syl = re.compile("Syl -> .*?(?=(, Syls ->)|$)")
-    print("string:  ", string)
     syl_regex = re.compile("(?<!\()Syl ->.*?(?=\()")
     # syl_regex = re.compile("Syl -> [\w\d ]+ ")
     return syl_regex.findall(string)
     # return [x.group(0) for x in just_syl.finditer(string)]
 
-
+# deprecated (from older grammar format)
 def process_syl(string):
     onset_regex = re.compile("Onset -> .+?(?= \()")
     nucleus_regex = re.compile("Nucleus -> .+?(?= \()")
@@ -97,24 +97,3 @@ def process_syl(string):
 
     return toret
 
-
-# print(parse_file("/Users/Elias/SylliGram/infag-2"))
-
-
-# if __name__ == '__main__':
-#     f2 = open("syllabified", "w")
-#     path = sys.argv[1]
-#     all_words = parse_file(path)
-#     for k,v in all_words.items():
-#         w = v[0]
-#         f2.write(k+":"+w+"\n")
-
-
-    # directory = sys.argv[1]    
-    # for dir in os.walk(directory):
-    #     for file in dir[2]:
-    #         if file_regex.match(file):
-    #             path = os.path.join(dir[0],file)
-    #             all_words = parse_file(path)
-    #             for w in all_words:
-    #                 f2.write(w + "\n")

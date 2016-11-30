@@ -1,9 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
-# @ Coda 1000 100 0\n\
-# @ Nucleus 1000 100 0\n\
-# @ Onset 5000 100 0\n\
 import sys 
 
 def write_grammar(seg_file, grammar_file):
@@ -12,7 +9,7 @@ def write_grammar(seg_file, grammar_file):
     try:
         assert(len(seglines)<=3 and len(seglines)>=2)
     except AssertionError:
-        print "ERROR: segment file must have less than 3 and more than 2 lines"
+        print("ERROR: segment file must have less than 3 and more than 2 lines")
 
     syllabics = seglines[0].split(",")
     nonsyllabics = seglines[1].split(",")
@@ -20,7 +17,7 @@ def write_grammar(seg_file, grammar_file):
         liquids = seglines[2].split(",")
     except IndexError:
         liquids = None
-
+    # this is the header, potentially what needs to be changed
     header = "% non-terminals\n\
 Word ->  Syls\n\
 \n\
@@ -32,10 +29,15 @@ Word ->  Syls\n\
 Syls ->  Syl\n\
 Syls ->  Syl Syls\n\
 Syl -> Rhyme\n\
+Syl -> Rhyme2\n\
 Syl -> Onset Rhyme\n\
+Syl -> Onsets Rhyme\n\
+Syl -> Onset Rhyme2\n\
+Syl -> Onsets Rhyme2\n\
 Rhyme -> Nucleus\n\
-Rhyme -> Nucleus Coda\n\
-Onset -> Consonants\n\
+Rhyme2 -> Nucleus Coda\n\
+Onset -> Consonant\n\
+Onsets -> Consonants\n\
 Nucleus -> Vowels\n\
 Coda -> Consonants\n\
 Consonants -> Consonant\n\
@@ -45,7 +47,7 @@ Vowels -> Vowel Vowels\n\
 \n\
 %terminals\n"
 
-    
+    # write the terminals
     with open(grammar_file, "w") as f1:
         f1.write(header)
 
@@ -58,8 +60,3 @@ Vowels -> Vowel Vowels\n\
             f1.write('Consonant -> "{}"'.format(c.strip())+ "\n")
     return syllabics
         
-
-# try:
-#     write_grammar(sys.argv[1], sys.argv[2], sys.argv[3], sys.argv[4])
-# except IndexError:
-#      write_grammar(sys.argv[1], sys.argv[2], sys.argv[3])
