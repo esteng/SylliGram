@@ -19,11 +19,11 @@ def merge_two_dicts(x, y):
 # change to read from file
 def run(queue, grammar_file, number, output_dir, towrite):
 
-    # with open(os.path.join(input_dir,"train.dat"), "w") as f5:
-    #     jprime = 0
-    #     for j,line in enumerate(towrite):
-    #         if line != '':
-    #             f5.write(line)
+    with open(os.path.join(input_dir,"train.dat"), "w") as f5:
+        jprime = 0
+        for j,line in enumerate(towrite):
+            if line != '':
+                f5.write(line)
 
 
 

@@ -25,15 +25,14 @@ def write_grammar(seg_file, grammar_file):
 Word ->  Syls\n\
 \n\
 % adapted non-terminals\n\
-@ Word 100 500 0\n\
-@ Syl 1000 10 10\n\
-@ Rhyme 2500 10 10\n\
+@ Word 1000 500 0\n\
+@ Syl 1000 10 0\n\
+@ Rhyme 2500 10 0\n\
 \n\
-Syls ->  Syl\n\
-Syls ->  Syl Syls\n\
+Syls -> Syl\n\
+Syls -> Syl Syls\n\
 Syl -> Rhyme\n\
-Syl -> ORSyl\n\
-ORSyl -> Onset Rhyme\n\
+Syl -> Onset Rhyme\n\
 Rhyme -> Nucleus\n\
 Rhyme -> Nucleus Coda\n\
 Onset -> Consonants\n\

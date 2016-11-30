@@ -31,6 +31,7 @@ def parse_file(path):
                 for syl in syl_strings:
                     # syl = process_syl(s)
                     syl = re.sub("Syl -> ", "", syl)
+                    syl = re.sub("Onset","",syl)
                     syllabified_word += re.sub("\s","",syl) + " "
                     word +=syl
                     word = word.strip()
