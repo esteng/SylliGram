@@ -1,8 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf8 -*-
 
-#@ Word 7500 500 0\n\
-
+# @ Coda 1000 100 0\n\
+# @ Nucleus 1000 100 0\n\
+# @ Onset 5000 100 0\n\
 import sys 
 
 def write_grammar(seg_file, grammar_file):
@@ -22,27 +23,26 @@ def write_grammar(seg_file, grammar_file):
 
     header = "% non-terminals\n\
 Word ->  Syls\n\
-Syls ->  Syl\n\
-Syls ->  Syl Syls\n\
 \n\
 % adapted non-terminals\n\
-@ Word 2500 300 0\n\
-@ Syl 1000 10 0\n\
-@ Coda 1000 10 0\n\
-@ Nucleus 1000 100 0\n\
-@ Onset 5000 100 0\n\
+@ Word 100 500 0\n\
+@ Syl 1000 10 10\n\
+@ Rhyme 2500 10 10\n\
 \n\
-Syl ->  Rhyme\n\
-Syl ->  Onset Rhyme\n\
+Syls ->  Syl\n\
+Syls ->  Syl Syls\n\
+Syl -> Rhyme\n\
+Syl -> ORSyl\n\
+ORSyl -> Onset Rhyme\n\
 Rhyme -> Nucleus\n\
 Rhyme -> Nucleus Coda\n\
-Onset -> Consonant\n\
-Onset -> Consonant Consonants\n\
-Coda -> Consonant\n\
-Coda -> Consonant Consonants\n\
+Onset -> Consonants\n\
+Nucleus -> Vowels\n\
+Coda -> Consonants\n\
 Consonants -> Consonant\n\
 Consonants -> Consonant Consonants\n\
-Nucleus -> Vowel\n\
+Vowels -> Vowel\n\
+Vowels -> Vowel Vowels\n\
 \n\
 %terminals\n"
 

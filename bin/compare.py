@@ -24,7 +24,7 @@ for line in lines2:
     found_words[splitline[0]] = splitline[1]
     
 
-
+words = 0
 found = False
 for k,v in true_words.items():
     try:
@@ -34,9 +34,10 @@ for k,v in true_words.items():
         else:
             print("{} doesnt match {}".format(found_words[k].strip(), v.strip()))
             unfound += 1
+        words +=1
+
     except KeyError:
-        if k.startswith("Unt@rbrINUN"):
-            print("couldn't find Unt@rbrINUN")
+        pass
         # print("{} not in found_words".format(k))
         # unfound+=1
     
@@ -44,9 +45,9 @@ for k,v in true_words.items():
 
 
 print("{} remained unmatched".format(unfound))
-print("matched {} out of {}, which is {}%".format((len(lines1) - unfound), len(lines1), float(100* (len(lines1) - unfound)/len(lines1))))
+print("matched {} out of {}, which is {}%".format((len(lines1) - unfound), len(lines1), float(100* (len(lines1) - unfound)/words)))
 
-
+print("there were {} words".format(words))
 
 
 

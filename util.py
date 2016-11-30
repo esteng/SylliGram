@@ -66,6 +66,7 @@ class AdaptedProduction(nltk.grammar.Production):
     
     def retrieve_tokens_of_adapted_non_terminal(self, adapted_non_terminal):
         if self.lhs()==adapted_non_terminal:
+
             return ["".join(self.rhs())];
         else:
             token_list = [];

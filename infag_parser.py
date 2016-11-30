@@ -5,9 +5,10 @@ import sys
 
 
 def parse_file(path):
+    words = 0
     all_words = {}
     prefix_regex = re.compile(".*?(?=((?<!\()Word))")
-    line_regex=re.compile("Word -> .*")
+    line_regex=re.compile("True.*Word -> .*")
     just_word = re.compile("Word -> .*? (?=[(])")
     with open(path) as f1: 
         lines =f1.readlines()
@@ -18,26 +19,28 @@ def parse_file(path):
         p = prefix_regex.search(line)
         if p is not None:
             prefix = p.group(0).replace("True", "").replace("False", "").strip()
+
+        
         s = line_regex.search(line)
         if s is not None:
+            words +=1
             # split it up, get the onsets and nuclei
-
-            syl_strings = get_syls(s.group(0))
-
+            syl_strings = get_syls(line)
             if syl_strings is not None:
                 syllabified_word = ""
-                for s in syl_strings:
-                    syl = process_syl(s)
-                    syllabified_word += syl + " "
+                for syl in syl_strings:
+                    # syl = process_syl(s)
+                    syl = re.sub("Syl -> ", "", syl)
+                    syllabified_word += re.sub("\s","",syl) + " "
                     word +=syl
+                    word = word.strip()
+                    word = re.sub("\s","",word)
                 if syllabified_word == "":
                     pass
                     # print(line)  
 
                 try:
                     first = all_words[word][1]
-                    if word == "violEnt":
-                        print("first: {} original: {}, prefix: {} new: {}".format(first, all_words[word][0], prefix, syllabified_word))
                     if first < prefix:
                         all_words[word] = [syllabified_word, prefix] 
                         # print("switching {} to {} because {} < {} ".format(all_words[word][0], syllabified_word, first, prefix))   
@@ -46,34 +49,54 @@ def parse_file(path):
             else:
                 pass
                 # print(s.group(0))
+    #print("there were {} word lines in file {}".format(words, path))
     return all_words
 
 def get_syls(string):
-    just_syl = re.compile("Syl -> .*?(?=(, Syls ->)|\))")
-    return [x.group(0) for x in just_syl.finditer(string)]
+    # just_syl = re.compile("Syl -> .*?(?=(, Syls ->)|$)")
+    # syl_regex = re.compile("(?<!\()Syl ->.*?(?=\()")
+    syl_regex = re.compile("(?<!OR)Syl -> [\w\d ]+ ")
+    return syl_regex.findall(string)
+    # return [x.group(0) for x in just_syl.finditer(string)]
 
 
 def process_syl(string):
-    onset_regex = re.compile("Onset -> .*?(?=(Rhyme))")
-    rhyme_regex = re.compile("Rhyme -> .*")
-    nucleus_regex = re.compile("Nucleus -> .*")
-    coda_regex = re.compile("Coda -> .*")
+    onset_regex = re.compile("Onset -> .+?(?= \()")
+    nucleus_regex = re.compile("Nucleus -> .+?(?= \()")
+    coda_regex = re.compile("(?!<\()Coda -> .+?(?= \()")
     seg_regex = re.compile("(?<=')[^\s](?=')")
+    rhyme_regex = re.compile("(?<!\()Rhyme -> .+?(?= \()")
 
     onset,nucleus,coda,seg=None,None,None,None
     o = onset_regex.search(string)  
     if o is not None:
-        onset = "".join(seg_regex.findall(o.group(0)))   
+        onset = o.group(0).replace("Onset -> ","").strip()
+    # n = nucleus_regex.search(string)
+    # c = coda_regex.search(string)
+    # nucleus = n.group(0)
+    # rhyme = nucleus.replace("Nucleus -> ","").strip()
+    # rhyme= rhyme.strip()
+    # if c:
+    #     coda = c.group(0).replace("Coda -> ","")
+
+    #     rhyme+=coda.strip()
+    # else:
+    #     return ""
     r = rhyme_regex.search(string)
-    if r is not None:
-        rhyme = "".join(seg_regex.findall(r.group(0)))
-    else:
-        return ""
+    rhyme = r.group(0)
+    rhyme = rhyme.replace("Rhyme -> ", "")
+    rhyme = re.sub("\s","", rhyme)
     toret = "" 
     if onset is not None:
         toret+= onset.strip()    
     toret+= rhyme.strip()
+    
+    toret = re.sub("\s", "", toret)
+
     return toret
+
+
+# print(parse_file("/Users/Elias/SylliGram/infag-2"))
 
 
 # if __name__ == '__main__':

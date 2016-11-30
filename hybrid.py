@@ -1564,7 +1564,7 @@ class Hybrid(object):
                     
                 #self.model_state_assertion();
                 #replace_grammaton_clock = time.time()
-                number_of_tables_relabelled += self._recursive_replace_grammaton(adapted_non_terminal, old_adapted_production, new_adapted_production);
+                # number_of_tables_relabelled += self._recursive_replace_grammaton(adapted_non_terminal, old_adapted_production, new_adapted_production);
                 #replace_grammaton_clock = time.time() - replace_grammaton_clock
                 #print "time to replace grammaton", replace_grammaton_clock
                 #self.model_state_assertion();
