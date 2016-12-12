@@ -161,7 +161,7 @@ def main():
     for line in input_stream:
         train_docs.append(line.strip());
     input_stream.close();
-    print "successfully load all training documents..."
+    print ("successfully load all training documents...")
     
     # parameter set 2
     if options.number_of_documents>0:

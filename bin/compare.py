@@ -60,11 +60,11 @@ print("matched {} out of {}, which is {}%".format((len(lines1) - unfound), words
 for k in sorted(distances.keys()):
     print("distance: {}, frequency: {}".format(k, distances[k]))
 
-with open("/Users/Elias/550FinalProject/distances","w") as f2:
-    for k in sorted(distances.keys()):
-        f2.write(str(k) + ",")
-    for k in sorted(distances.keys()):
-        f2.write(str(distances[k])+",")
+#with open("/Users/Elias/550FinalProject/distances","w") as f2:
+ #   for k in sorted(distances.keys()):
+  #      f2.write(str(k) + ",")
+   # for k in sorted(distances.keys()):
+    #    f2.write(str(distances[k])+",")
 
 
 
@@ -72,7 +72,6 @@ lengthlist = [len(x) for x in found_words.keys()]
 print("average word length was {}".format(sum(lengthlist)/len(lengthlist)))
 
 print("there were {} words".format(words))
-
 
 
 

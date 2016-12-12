@@ -1,0 +1,15 @@
+Elias:
+-Building German and French corpora
+-Testing with German and French data
+-Researching PyAdaGram and adaptor algorithms, especially work done by Mark Johnson
+-Created Grammar Generator to create a grammar from set of data
+-Created Infag Parser to compare syllabification resulting from adaptor grammar to actual syllabification
+-Created main.py to bring all elements together to test
+
+Emily:
+-Project proposal
+-Project write up
+-Project Presentation (PowerPoint)
+-Building English and Dutch corpora
+-Testing with English and Dutch data
+-Contributed to building of French corpora
