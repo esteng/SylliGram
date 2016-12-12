@@ -3,3 +3,9 @@ dutch/*
 french/*
 german/*
 english/*
+
+*.pyc
+
+launch_train.pyc
+
+*.pyc
