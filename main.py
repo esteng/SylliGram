@@ -32,9 +32,7 @@ def run(grammar_file, output_dir, towrite):
             print("This is due to missing segments in your segfile. You are missing the following:")
             print(missing_segs)
         else:
-            print("This error may have been caused by missing files. Please check that the list of words you would like \
-            syllabified is in a space-separated file named 'train.dat' in the directory you specified as your input\
-             directory, and that your grammar file filename has a valid filename and path.")
+            print("This error may have been caused by missing files. Please check that the list of words you would like syllabified is in a space-separated file in the directory you specified as your input directory, and that your grammar file filename has a valid filename and path.")
     # find the produced inf-ag file
     filename = ""
     infag_regex = re.compile("infag.*")
@@ -48,7 +46,7 @@ def run(grammar_file, output_dir, towrite):
     return all_words
 
 if __name__ == "__main__":
-    # write the grammar based on the inputted file
+    # write the grammar based on the input file
     syllabics = write_grammar(sys.argv[1], "{}".format(sys.argv[3]))
     grammar_file = sys.argv[3]
     input_dir = os.path.split(sys.argv[2])[0]

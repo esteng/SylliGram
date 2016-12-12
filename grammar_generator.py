@@ -17,7 +17,7 @@ def write_grammar(seg_file, grammar_file):
         liquids = seglines[2].split(",")
     except IndexError:
         liquids = None
-    # this is the header, potentially what needs to be changed
+    # this is the header, remains constant for every corpus
     header = "% non-terminals\n\
 Word ->  Syls\n\
 \n\

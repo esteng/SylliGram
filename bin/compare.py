@@ -3,6 +3,8 @@ import sys
 from nltk.metrics import edit_distance
 
 
+
+
 file1 = sys.argv[1]
 file2 = sys.argv[2]
 
@@ -30,6 +32,8 @@ words = 0
 found = False
 distances = {}
 
+
+# compare each word found to the corresponding word in the corpus, if it doesn't match, increment unfound
 for k,v in true_words.items():
     try:
         if found_words[k].strip() == v.strip():
@@ -55,16 +59,16 @@ for k,v in true_words.items():
 
 
 print("{} remained unmatched".format(unfound))
-print("matched {} out of {}, which is {}%".format((len(lines1) - unfound), words, float(100* (len(lines1) - unfound)/words)))
+print("matched {} out of {}, which is {}%".format((words - unfound), words, float(100* (words - unfound)/words)))
 
 for k in sorted(distances.keys()):
     print("distance: {}, frequency: {}".format(k, distances[k]))
 
-with open("/Users/Elias/550FinalProject/distances","w") as f2:
-    for k in sorted(distances.keys()):
-        f2.write(str(k) + ",")
-    for k in sorted(distances.keys()):
-        f2.write(str(distances[k])+",")
+# with open("/Users/Elias/550FinalProject/distances","w") as f2:
+#     for k in sorted(distances.keys()):
+#         f2.write(str(k) + ",")
+#     for k in sorted(distances.keys()):
+#         f2.write(str(distances[k])+",")
 
 
 

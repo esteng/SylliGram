@@ -7,20 +7,23 @@ import sys
 def parse_file(path):
     words = 0
     all_words = {}
+    # find the number + line
     prefix_regex = re.compile(".*?(?=((?<!\()Word))")
+    # find valid lines
     line_regex=re.compile("True.*Word -> .*")
+    # find word without number/True
     just_word = re.compile("Word -> .*? (?=[(])")
     with open(path) as f1: 
         lines =f1.readlines()
     for i, line in enumerate(lines):
         word = ""
-        # get lines starting with word -> ...
+        # get lines starting with Word -> ...
         prefix = "<UNFOUND>"
         p = prefix_regex.search(line)
         if p is not None:
+            # get the probability for the line (expansion)
             prefix = p.group(0).replace("True", "").replace("False", "").strip()
-
-        
+        # make sure the expansion is valid
         s = line_regex.search(line)
         if s is not None:
             words +=1
@@ -29,17 +32,16 @@ def parse_file(path):
             if syl_strings is not None:
                 syllabified_word = ""
                 for syl in syl_strings:
-                    # syl = process_syl(s)
-                    print("SYL: {}".format(syl))
+                    # get rid of the Syl -> string
                     syl = re.sub("Syl -> ", "", syl)
+                    # strip it, add the syllable followed by a space
                     syllabified_word += re.sub("\s","",syl) + " "
                     word +=syl
                     word = word.strip()
                     word = re.sub("\s","",word)
                 if syllabified_word == "":
                     pass
-                    # print(line)  
-
+                # if the new probability is greater than existing, replace the expansion with more probable one
                 try:
                     first = all_words[word][1]
                     if first < prefix:
@@ -49,8 +51,6 @@ def parse_file(path):
                     all_words.update({word: [syllabified_word, prefix]}) 
             else:
                 pass
-                # print(s.group(0))
-    #print("there were {} word lines in file {}".format(words, path))
     return all_words
 
 # find all Syl -> xxx strings
@@ -62,6 +62,7 @@ def get_syls(string):
     # return [x.group(0) for x in just_syl.finditer(string)]
 
 # deprecated (from older grammar format)
+# keep in case we go back to similar format
 def process_syl(string):
     onset_regex = re.compile("Onset -> .+?(?= \()")
     nucleus_regex = re.compile("Nucleus -> .+?(?= \()")
